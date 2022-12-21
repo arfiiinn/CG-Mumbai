@@ -1,0 +1,20 @@
+.header nav{
+    background: rgb(0,112,173);
+    background: linear-gradient(90deg, rgba(0,112,173,1) 28%, rgba(18,171,219,1) 74%);
+    font-family: 'Ubuntu';
+       
+}
+.nav-link{
+    color:#fff;
+    font-size: 17px;
+}
+    
+.nav-link:hover{
+    color:#e3f2fd;
+}
+        
+.logout:hover{
+ color: rgb(0,112,173);
+}
+
+

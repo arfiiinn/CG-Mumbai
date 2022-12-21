@@ -1,0 +1,22 @@
+.welcome-head{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: rgb(1, 107, 164);
+}
+.sa-header{
+    margin: 2% 7%;
+}
+.sa-body{
+    margin: 2% 7%;
+}
+
+.nav-tabs .nav-link{
+    color: rgb(1, 107, 164) !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+  
+  .nav-tabs .nav-link.active {
+    border-bottom: solid 4px rgb(1, 107, 164) !important;
+  }

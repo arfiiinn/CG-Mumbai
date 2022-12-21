@@ -1,0 +1,14 @@
+.footer-bg{
+    font-family: 'Ubuntu';
+    background-image: radial-gradient(10deg,circle, #f5f7fa, #e8edf4, #dce3ee, #cfd9e8, #c3cfe2);
+}
+.footerlogo{
+    width: 25%;
+}
+
+.bi{
+    color:rgb(77, 75, 75);
+}
+.bi:hover{
+    color: rgb(0,112,173);
+}

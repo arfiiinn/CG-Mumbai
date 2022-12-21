@@ -1,0 +1,33 @@
+.role-row{
+    margin-right:0;
+    padding-bottom: 11%;
+}
+.role-card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+.role-label-heading{
+    font-family: 'Montserrat';
+    font-weight:600;
+}
+
+.add-role, .role-icon{
+    color: rgb(0, 112, 173);
+}
+
+.add-role,.role-icon:hover{
+    color: rgb(21, 150, 219);
+}
+
+.role-delete{
+    color:rgb(244, 91, 91);
+}
+
+.role-delete:hover{
+    color:rgb(255, 0, 0);
+}
+
+.Update-Footer{
+    text-align: center;
+}
