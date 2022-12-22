@@ -11,6 +11,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import ViewUser from './Components/User/ViewUser';
 import TaskList from './Components/Task/TaskList';
 import TaskDetails from './Components/Task/TaskDetails';
+import Assignedtasks from './Components/Task/Assignedtasks';
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
          
           <Route path='/taskdetails' element={<TaskDetails/>}/>
           <Route path='/tasklist' element={<TaskList/>}/>
+          <Route path='/assigntask' element={<Assignedtasks/>}/>
+
         </Routes> 
        </BrowserRouter>
        <Footer/>
