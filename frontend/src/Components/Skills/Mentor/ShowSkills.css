@@ -1,0 +1,53 @@
+.skill-card{
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.skill-label-heading{
+    font-family: "Montserrat";
+    font-weight: 600;
+}
+
+.add-skill,.skill-icon{
+    color: rgb(0, 112, 173);
+}
+
+.add-skill,.skill-icon:hover{
+    color: rgb(21, 150, 219);
+    
+}
+
+.skill-delete{
+    color:rgb(244, 91, 91);
+}
+
+.skill-delete:hover{
+    color:rgb(255, 0, 0);
+}
+
+.some{
+    margin: 0 auto;
+}
+
+.fa-plus-circle{
+    cursor:pointer;
+}
+
+.read
+{
+    border: none;
+    background-color: transparent;
+    color: rgb(37, 128, 184);
+}
+
+.search-btn{
+    color: white;
+    border:0;
+    padding:7px;
+    border-radius: 7px;
+    background-color: rgb(0, 112, 173);
+     transition-duration: 0.4s;
+}
+.search-btn:hover{
+     background-color: rgb(21, 150, 219);
+}

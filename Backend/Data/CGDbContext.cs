@@ -22,5 +22,9 @@ namespace Backend.Data
         public DbSet<TaskComments> TaskComments { get; set; }
 
         public DbSet<Domain> Domain { get; set; }
+
+        public DbSet<Skills> Skills { get; set; }
+
+        public DbSet<CandidateSkills> CandidateSkills { get; set; }
     }
 }

@@ -12,6 +12,8 @@ import ViewUser from './Components/User/ViewUser';
 import TaskList from './Components/Task/TaskList';
 import TaskDetails from './Components/Task/TaskDetails';
 import Assignedtasks from './Components/Task/Assignedtasks';
+import ShowSkills from './Components/Skills/Mentor/ShowSkills';
+import AddSkills from './Components/Skills/Candidate/AddSkills';
 
 function App() {
   return (
@@ -34,6 +36,11 @@ function App() {
           <Route path='/taskdetails' element={<TaskDetails/>}/>
           <Route path='/tasklist' element={<TaskList/>}/>
           <Route path='/assigntask' element={<Assignedtasks/>}/>
+
+           {/* Skills Module */}
+
+          <Route path='/showskills' element={<ShowSkills />} />
+          <Route path='/addskills' element={<AddSkills />} />
 
         </Routes> 
        </BrowserRouter>

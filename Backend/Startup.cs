@@ -1,3 +1,4 @@
+using backend.Data;
 using backend.Repositories;
 using Backend.Data;
 using Backend.Repositories;
@@ -40,7 +41,10 @@ namespace Backend
 
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
             services.AddSingleton<IEmailSender, EmailSenderService>();
+            services.AddTransient<ISkills, SkillService>();
+            services.AddTransient<ICandidateSkills, CandidateSkillsService>();
             services.AddTransient<IRole, RoleDataService>();
+
 
             // JWT AUTHENTICATION SERVICE
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
