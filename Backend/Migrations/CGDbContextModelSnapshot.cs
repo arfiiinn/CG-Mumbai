@@ -36,9 +36,8 @@ namespace backend.Migrations
                     b.Property<DateTime>("DOJ")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Domain")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DomainId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -84,9 +83,27 @@ namespace backend.Migrations
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("DomainId");
+
                     b.HasIndex("RoleId");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("backend.Models.Domain", b =>
+                {
+                    b.Property<int>("DomainId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DomainName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DomainId");
+
+                    b.ToTable("Domain");
                 });
 
             modelBuilder.Entity("backend.Models.Role", b =>
@@ -195,6 +212,12 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Backend.Models.User", b =>
                 {
+                    b.HasOne("backend.Models.Domain", "Domains")
+                        .WithMany()
+                        .HasForeignKey("DomainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("backend.Models.Role", "Roles")
                         .WithMany()
                         .HasForeignKey("RoleId")

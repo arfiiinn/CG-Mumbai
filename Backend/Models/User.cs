@@ -56,7 +56,8 @@ namespace Backend.Models
         public int RoleId { get; set; }
 
         [Required]
-        public string Domain { get; set; }
+        [ForeignKey("Domain")]
+        public int DomainId { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -68,5 +69,7 @@ namespace Backend.Models
         public bool IsVerified { get; set; }
 
         public virtual Role Roles { get; set; }
+
+        public virtual Domain Domains { get; set; }
     }
 }

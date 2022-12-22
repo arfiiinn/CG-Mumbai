@@ -22,12 +22,14 @@ function TaskList(props) {
   const [documentname, setdocumentname] = useState();
   const [isfileselected, setisfileselected] = useState(false);
   const [taskid, settaskid] = useState();
+  const [doj,setdoj]=useState();
+  const [domain,setdomain]=useState();
+  const [tid,settid]=useState();
+  const [d,setd]=useState([]);
   const filedownload = (filename) => {
     axios.get(Config.api + `Tasks/DownloadFile?NameFile=${filename}`)
       .then(response => { console.log(response.request.responseURL); window.location.assign(response.request.responseURL); })
       .catch(err => alert(err))
-
-
   }
   const disableDates = () => {
     var today, dd, mm, yyyy;
@@ -76,6 +78,19 @@ function TaskList(props) {
     setisfileselected(true);
     console.log(isfileselected)
   }
+  const handleassign = (e) =>{
+    e.preventDefault();
+    const t = {
+      domain : domain,
+      date : doj,
+      taskId : tid
+    }
+    console.log(t)
+    axios.post(Config.api+`TaskAssigneds/all?domain=${t.domain}&date=${t.date}&taskid=${t.taskId}`)
+    .then(res => {alert(res.data);window.location.reload()})
+    .catch(err => alert(err))
+    
+  }
   const handleupdate = (e) => {
     e.preventDefault()
     const payload = {
@@ -109,6 +124,10 @@ function TaskList(props) {
   useEffect(() => {
     axios.get(Config.api + 'Tasks')
       .then(res => settasklist(res.data))
+      .catch(err => alert(err))
+
+      axios.get(Config.api + 'Domains')
+      .then(res => setd(res.data))
       .catch(err => alert(err))
   }, [])
 
@@ -147,7 +166,7 @@ function TaskList(props) {
                       <div className='row'>
                         <div className='col-md-10'>
                           <button className="btn task-submit mt-2" onClick={() => {
-                            setAssignmodal(t.taskId);
+                            setAssignmodal(t.taskId);settid(t.taskId);
                           }} disabled={t.taskStatus}><i class="fa fa-tasks"></i>
                             &nbsp;
                             {status(t.taskStatus)}
@@ -279,16 +298,15 @@ function TaskList(props) {
                     </Modal.Header>
 
                     <Modal.Body>
-                      <Form className="Assign-form">
+                      <Form className="Assign-form"  onSubmit={handleassign}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label className="text-dark" >Domain Name</Form.Label>
-                          <Form.Control
-                            id=""
-                            type="text"
-                            placeholder="Enter Domain Name"
-                            // value=""
-                            onChange=""
-                          />
+                          <select className="form-select"   onChange={e => setdomain(e.target.value)}>
+                        <option defaultValue={""}>Select Domain</option>
+                         {d.map(u=>
+                         <option value={u.domainId}>{u.domainName}</option>
+                         )}
+                       </select>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                           <Form.Label className="text-dark">Date of Joining</Form.Label>
@@ -297,13 +315,12 @@ function TaskList(props) {
                             type="Date"
                             placeholder="Enter DOJ"
                             max={disableDates()}
-                            // value=""
-                            onChange=""
+                            onChange={e=>setdoj(e.target.value)}
                           />
                         </Form.Group>
 
                         <center>
-                          <Button variant="primary" className="submit" >
+                          <Button variant="primary" className="submit" type="submit" >
                             Assign
                           </Button>
                         </center>

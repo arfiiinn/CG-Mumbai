@@ -107,19 +107,20 @@ namespace backend.Controllers
             return _context.TaskAssigned.Any(e => e.TaskAssignedId == id);
         }
         [HttpPost("all")]
-        public async Task<ActionResult<object>> PostTaskAssignedall(string domain, DateTime date, int taskid)
+        public async Task<ActionResult<object>> PostTaskAssignedall(int domain, DateTime date, int taskid)
         {
-            var list = _context.User.Include(i=>i.Roles).Where(r => r.Roles.RoleName == "Candidate").ToArray();
-            var flist = list.Where(u => u.Domain == domain).ToArray();
-            var flist2 = flist.Where(r => (r.DOJ).ToShortDateString()==(date).ToShortDateString()).ToArray();
-            
             try
             {
-                for (var i = 0; i <flist2.Length; i++)
+                var list = _context.User.Include(i=>i.Roles).Where(r => r.Roles.RoleName == "Candidate").ToArray();
+                var flist = list.Where(u => u.DomainId == domain).ToArray();
+                var flist2 = flist.Where(r => (r.DOJ).ToShortDateString()==(date).ToShortDateString()).ToArray();
+            
+           
+                for (var i = 0; i<flist2.Length; i++)
                 {
                     TaskAssigned t = new TaskAssigned
                     {
-                        UserId = list[i].UserId,
+                        UserId = flist2[i].UserId,
                         TaskId = taskid,
                         Scores = 0
                     };
@@ -134,6 +135,32 @@ namespace backend.Controllers
                 return BadRequest(e.Message);
             }
         }
+       
 
+        [HttpGet("User/{uid}")]
+        public async Task<ActionResult<object>> usertasks(int uid)
+        {
+            var taskAssigned = await _context.TaskAssigned.Where(r=>r.UserId==uid).Include(i=>i.Tasks).ToListAsync();
+
+            if (taskAssigned == null)
+            {
+                return NotFound();
+            }
+
+            return taskAssigned;
+        }
+
+        [HttpGet("Tasks/{tid}")]
+        public async Task<ActionResult<object>> tasks(int tid)
+        {
+            var taskAssigned = await _context.TaskAssigned.Where(r => r.TaskId == tid).Include(i => i.Tasks).ToListAsync();
+
+            if (taskAssigned == null)
+            {
+                return NotFound();
+            }
+
+            return taskAssigned;
+        }
     }
 }
