@@ -85,10 +85,22 @@ function TaskList(props) {
       date: doj,
       taskId: tid
     }
+    const payload = {
+      TaskId: taskid,
+      TaskName: taskname,
+      Deadline: deadline,
+      CreatedBy: parseInt(sessionStorage.getItem('Id')),
+      Description: description,
+      TaskStatus: true,
+      DocumentName: documentname
+    }
     console.log(t)
     axios.post(Config.api + `TaskAssigneds/all?domain=${t.domain}&date=${t.date}&taskid=${t.taskId}`)
       .then(res => { alert(res.data); window.location.reload() })
       .catch(err => alert(err))
+      axios.put(Config.api + `Tasks/${taskid}`, payload)
+      .then(res=>console.log(res))
+      .then(err=>console.log(err))
 
   }
   const handleupdate = (e) => {
@@ -167,6 +179,12 @@ function TaskList(props) {
                         <div className='col-md-10'>
                           <button className="btn task-submit mt-2" onClick={() => {
                             setAssignmodal(t.taskId); settid(t.taskId);
+                            settaskname(t.taskName);
+                            setdescription(t.description);
+                            setdeadline(t.deadline);
+                            settaskstatus(t.taskStatus);
+                            setdocumentname(t.documentName);
+                            settaskid(t.taskId);
                           }} disabled={t.taskStatus}><i class="fa fa-tasks"></i>
                             &nbsp;
                             {status(t.taskStatus)}
